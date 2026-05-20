@@ -10,8 +10,8 @@ import {
 import { Button } from "@/components/ui/button";
 
 import { useActionState, useState } from "react";
-import { FormInput } from "../form/user-form-input";
-import { FormSection } from "../form/user-form-section";
+import { FormInput } from "./user-form-input";
+import { FormSection } from "./user-form-section";
 
 export function CreateUserForm() {
   const [openPanel, setOpenPanel] = useState<

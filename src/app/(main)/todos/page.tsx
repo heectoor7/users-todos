@@ -1,7 +1,7 @@
 import { getTodosUseCase } from "./_core/todo.use-cases";
 import { TodoSearch } from "./_components/todo-search";
 import { TodoList } from "./_components/todo-list";
-import { getSession } from "@/app/(auth)/auth.actions";
+import { getSession } from "../../(auth)/auth.actions";
 import { redirect } from "next/navigation";
 
 type Props = {

@@ -4,7 +4,7 @@ import { ApiTodoT, todoAdapter } from './todo.definitions';
 // import { TodoT } from './todo.definitions';
 // import { handleResponseError } from '@/lib/errors';
 
-const API_BASE_URL = process.env.API_URL;
+const API_BASE_URL = process.env.API_URL_JSONPLACEHOLDER;
 
 export const getTodosServices = async () => {
   const urlSufix = `/todos?_limit=30`;

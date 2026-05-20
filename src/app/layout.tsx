@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { NuqsAdapter } from "nuqs/adapters/react";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 import "./globals.css";
 import Navbar from "../components/navbar";
-import { TooltipProvider } from "@/components/ui/tooltip"
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { Toaster } from "@/components/ui/sonner";
+import NextTopLoader from "nextjs-toploader";
+import { CartSheetProvider } from "./(main)/products/cart/context/CartContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,10 +36,14 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <NuqsAdapter>
           <TooltipProvider>
-          <div>
-            <Navbar />
-            <div>{children}</div>
-          </div>
+            <div>
+              <NextTopLoader height={4} showSpinner={true} />
+              <CartSheetProvider>
+              <Navbar />
+              <div>{children}</div>
+              <Toaster position="bottom-center" richColors />
+              </CartSheetProvider>
+            </div>
           </TooltipProvider>
         </NuqsAdapter>
       </body>

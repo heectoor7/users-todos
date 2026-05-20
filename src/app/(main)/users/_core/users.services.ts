@@ -1,7 +1,7 @@
 import { ApiUsersT, usersAdapter, UsersT } from './users.definitions';
 import { callApi } from '@/lib/call-api';
 
-const API_BASE_URL = process.env.API_URL;
+const API_BASE_URL = process.env.API_URL_JSONPLACEHOLDER;
 
 export const getUsersServices = async () => {
   const urlSufix = `/users`;
@@ -15,7 +15,7 @@ export const getUsersServices = async () => {
   return {
     ...response,
     data: usersAdapted,
-  
+  };
 };
 
 export const createUserService = async (userData: Partial<UsersT>) => {

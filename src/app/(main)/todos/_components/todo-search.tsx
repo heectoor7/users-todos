@@ -1,46 +1,38 @@
 "use client";
 
-import Link from "next/link";
-import { useQueryState } from "nuqs";
-import { useEffect } from "react";
-import { useHydrate } from "@/hooks/useHydrate";
+import { useQueryState, parseAsString } from "nuqs";
+import { useTransition } from "react";
+import { TbEraser } from "react-icons/tb";
 
 export function TodoSearch() {
-  const hydrated = useHydrate();
-
-  const [query, setQuery] = useQueryState("query", {
-    defaultValue: "",
-    clearOnDefault: true,
-    shallow: false,
-    throttleMs: 500,
-  });
-
-  useEffect(() => {
-    console.log("🔍 Query de búsqueda actualizada:", query);
-  }, [query]);
+  const [isPending, startTransition] = useTransition();
+  const [query, setQuery] = useQueryState(
+    "query",
+    parseAsString.withOptions({
+      shallow: false,      
+      startTransition,     
+      throttleMs: 1500, 
+    }).withDefault("")
+  );
 
   return (
-    <form method="GET" action="/todos" className="mb-8 flex gap-2">
+    <div className="mb-4 flex gap-2 w-full max-w-md relative">
       <input
-        name="query"
-        defaultValue={query}
-        placeholder="Buscar tarea y pulsa Enter..."
-        className="border p-2 rounded w-full text-black outline-none focus:ring-2 focus:ring-blue-500"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Escribe para buscar..."
+        className={`border p-2 rounded w-full text-black outline-none focus:ring-2 focus:ring-blue-500 transition-opacity ${
+          isPending ? "opacity-50" : "opacity-100"
+        }`}
       />
-      <button
-        type="submit"
-        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-      >
-        Buscar
-      </button>
-      {hydrated && query && (
-        <Link
-          href="/todos"
-          className="bg-gray-200 text-gray-700 px-4 py-2 rounded flex items-center"
+      {query && (
+        <button
+          onClick={() => setQuery("")}
+          className="absolute right-2 top-1/2 -translate-y-1/2 text-red-700 p-1 hover:bg-gray-100 rounded"
         >
-          Limpiar
-        </Link>
+          <TbEraser size={20} />
+        </button>
       )}
-    </form>
+    </div>
   );
 }
