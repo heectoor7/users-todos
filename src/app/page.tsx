@@ -1,11 +1,12 @@
 import { Suspense } from "react";
 import { headers } from "next/headers";
+import Traductor from "./TraductorPrueba";
 
 export default function Page() {
   return (
     <main className="flex flex-col p-8 w-full justify-center items-center">
       <h1 className="text-2xl font-bold mb-4">Gestor de Tareas</h1>
-      
+
       <Suspense fallback={<p>Cargando información de usuario...</p>}>
         <UserWelcome />
       </Suspense>
@@ -21,6 +22,11 @@ async function UserWelcome() {
   if (!isLoggedIn) return null;
 
   return (
-    <p>Bienvenido <b>{username}</b></p>
+    <>
+      <p>
+        Bienvenido <b>{username}</b>
+      </p>
+      <Traductor />
+    </>
   );
 }

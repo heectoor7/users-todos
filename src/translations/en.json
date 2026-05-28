@@ -1,0 +1,18 @@
+{
+  "Principal": {
+    "Welcome": "Welcome to React and react-i18next"
+  },
+  "Navbar": {
+    "Home": "Home",
+    "Tareas": "Tasks",
+    "Usuarios": {
+      "Usuarios": "Users",
+      "Lista": "User list",
+      "Buscar": "Search a user",
+      "Actualizar": "Update a user"
+    },
+    "Productos": "Products",
+    "Cerrar sesión": "Log out",
+    "Login": "Log in"
+  }
+}

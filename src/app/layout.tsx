@@ -6,7 +6,6 @@ import Navbar from "../components/navbar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/sonner";
 import NextTopLoader from "nextjs-toploader";
-import { CartSheetProvider } from "./(main)/products/cart/context/CartContext";
 import { Suspense } from "react";
 import { Providers } from "@/components/providers";
 
@@ -41,7 +40,11 @@ export default function RootLayout({
             <div>
               <NextTopLoader height={4} showSpinner={true} />
               <Providers>
-                <Suspense fallback={<nav className="bg-gray-800 text-white p-4 w-full h-115" />}>
+                <Suspense
+                  fallback={
+                    <nav className="bg-gray-800 text-white p-4 w-full h-115" />
+                  }
+                >
                   <Navbar />
                 </Suspense>
                 <div>{children}</div>
