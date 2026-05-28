@@ -7,6 +7,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/sonner";
 import NextTopLoader from "nextjs-toploader";
 import { CartSheetProvider } from "./(main)/products/cart/context/CartContext";
+import { Suspense } from "react";
+import { Providers } from "@/components/providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,11 +40,13 @@ export default function RootLayout({
           <TooltipProvider>
             <div>
               <NextTopLoader height={4} showSpinner={true} />
-              <CartSheetProvider>
-              <Navbar />
-              <div>{children}</div>
-              <Toaster position="bottom-center" richColors />
-              </CartSheetProvider>
+              <Providers>
+                <Suspense fallback={<nav className="bg-gray-800 text-white p-4 w-full h-115" />}>
+                  <Navbar />
+                </Suspense>
+                <div>{children}</div>
+                <Toaster position="bottom-center" richColors />
+              </Providers>
             </div>
           </TooltipProvider>
         </NuqsAdapter>

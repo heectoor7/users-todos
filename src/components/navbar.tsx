@@ -1,10 +1,11 @@
-import { getSession } from "@/app/(auth)/auth.actions";
+import { headers } from "next/headers";
+
 
 import BreadCrumb from "./breadcrumb";
 
 export default async function Navbar() {
-  const session = await getSession();
-  const { isLoggedIn } = session;
+  const h = await headers();
+  const isLoggedIn = h.get("x-is-logged-in") === "true";
 
   return (
     <nav className="bg-gray-800 text-white p-4 w-full">

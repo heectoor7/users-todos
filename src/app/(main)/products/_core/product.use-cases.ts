@@ -1,11 +1,12 @@
 import {
-  getProductsCached,
+  getProductsServices,
   getProductsCategoriesCached,
 } from "./product.services";
 
 type GetProductsProps = {
   query?: string;
   category?: string;
+  available?: boolean;
   page: number;
   itemsPerPage: number;
 };
@@ -13,10 +14,11 @@ type GetProductsProps = {
 export const getProductsUseCase = async ({
   query,
   category,
+  available,
   page,
   itemsPerPage,
 }: GetProductsProps) => {
-  const products = await getProductsCached();
+  const products = await getProductsServices();
 
   let filtered = products.data;
 
@@ -30,6 +32,11 @@ export const getProductsUseCase = async ({
   // FILTRO POR CATEGORÍA
   if (category) {
     filtered = filtered.filter((p) => p.categoria === category);
+  }
+
+  // FILTRO POR DISPONIBILIDAD
+  if(available) {
+    filtered = filtered.filter((p) => p.disponibilidad === "In Stock")
   }
 
   // TOTAL

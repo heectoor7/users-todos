@@ -1,3 +1,4 @@
+import { cacheTag } from "next/cache";
 // import { handleResponseError } from '@/lib/errors';
 import { cache } from "@/lib/cache";
 import {
@@ -18,32 +19,35 @@ type ApiProductsResponse = {
   limit: number;
 };
 
+let peticionesReales = 0;
+
 export const getProductsServices = async () => {
+  "use cache";
+  cacheTag(CACHE_TAGS.products.self);
+  
+  peticionesReales++;
+  
   const urlSufix = `/products`;
   const apiUrl = API_BASE_URL + urlSufix;
-  console.log({ apiUrl });
-
+  
+  console.log(`->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->`);
+  console.log(`-------------------------------- EJECUCIÓN INTERNA DE LA FUNCIÓN Nº: [ ${peticionesReales}] A LA APIURL ${apiUrl}`);
+  
   const response = await callApi<ApiProductsResponse>(apiUrl, "GET");
-
-  console.log(response.data);
-  const productsAdapted: ProductT[] =
-    response.data.products.map(productAdapter);
-
+  
+  console.log(`-------------------------------- PRODUCTOS OBTENIDOS EN RESPONSE.DATA ${ response.data.products.length }`);
+  const productsAdapted: ProductT[] = response.data.products.map(productAdapter);
+  
   return {
     ...response,
     data: productsAdapted,
   };
 };
 
-export const getProductsCached = cache(getProductsServices, {
-  tags: [CACHE_TAGS.products.product.self],
-});
-
 export const getProductsCategories = async () => {
   const urlSufix = `/products/categories`;
   const apiUrl = API_BASE_URL + urlSufix;
 
-  // Tipamos la respuesta con el esquema del array
   const response = await callApi<ApiProductCategoriesT[]>(apiUrl, "GET");
   return {
     ...response,

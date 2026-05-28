@@ -13,10 +13,12 @@ datasource db {
 }
 
 model CartItem {
-  id          String @id
-  titulo      String
-  descripcion String
-  precio      Int
-  imagen      String
-  quantity    Int    @default(1)
+  id             String @id
+  titulo         String
+  descripcion    String
+  precio         Int
+  imagen         String
+  quantity       Int    @default(1)
+  categoria      String
+  disponibilidad String
 }

@@ -4,6 +4,8 @@ import { callApi } from '@/lib/call-api';
 const API_BASE_URL = process.env.API_URL_JSONPLACEHOLDER;
 
 export const getUsersServices = async () => {
+  "use cache"; 
+
   const urlSufix = `/users`;
   const apiUrl = API_BASE_URL + urlSufix;
   console.log({ apiUrl });

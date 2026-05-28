@@ -7,7 +7,8 @@ export const ApiProductSchema = z.object({
   price: z.number(),
   thumbnail: z.string(),
   quantity: z.number(),
-  category: z.string()
+  category: z.string(),
+  availabilityStatus: z.string()
 });
 export type ApiProductT = z.infer<typeof ApiProductSchema>;
 
@@ -19,6 +20,7 @@ export const ProductSchema = z.object({
   imagen: z.string(),
   quantity: z.number(),
   categoria: z.string(),
+  disponibilidad: z.string()
 });
 export type ProductT = z.infer<typeof ProductSchema>;
 
@@ -30,6 +32,7 @@ export const productAdapter = (api: ApiProductT): ProductT => ({
   imagen: api.thumbnail,
   quantity: api.quantity,
   categoria: api.category,
+  disponibilidad: api.availabilityStatus,
 });
 
 export const ApiProductCategoriesSchema =z.object({

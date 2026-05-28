@@ -1,4 +1,5 @@
-import { parseAsString } from "nuqs/server";
+import { parseAsBoolean, parseAsString } from "nuqs/server";
+
 import {
   createSearchParamsCache,
   parseAsInteger,
@@ -8,6 +9,7 @@ export const productsSearchParams = {
   page: parseAsInteger.withDefault(1),
   query: parseAsString.withDefault(""),
   category: parseAsString.withDefault(""),
+  available: parseAsBoolean.withDefault(false),
 };
 
 export const productsSearchParamsCache =

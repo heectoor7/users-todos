@@ -19,9 +19,12 @@ export async function addToCart(product: ProductT) {
         precio: product.precio,
         imagen: product.imagen,
         quantity: 1,
+        disponibilidad: product.disponibilidad,
+        categoria: product.categoria,
       },
     });
 
+    revalidatePath("/products/cart");
     revalidatePath("/products");
 
     return {
@@ -46,7 +49,7 @@ export async function getCart() {
 // Vaciar carrito
 export async function clearCart() {
   await prisma.cartItem.deleteMany();
-  revalidatePath("/");
+  revalidatePath("/products/cart");
 }
 
 // Elminar producto
@@ -70,7 +73,8 @@ export async function removeFromCart(productId: string) {
         where: { id: productId },
       });
     }
-    
+
+    revalidatePath("/products/cart");
     revalidatePath("/products");
 
     return {

@@ -41,6 +41,7 @@ export async function ProductItem({ product }: { product: ProductT }) {
             <CardFooter className="flex justify-between border-0">
               <div>
                 <p className="font-semibold">{product.precio}€</p>
+                <p className="text-gray-600">{product.disponibilidad}</p>
               </div>
             </CardFooter>
           </Card>

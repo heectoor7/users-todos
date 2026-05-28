@@ -8,7 +8,6 @@ import { Input } from "@/components/ui/input";
 // import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useServerAction } from "zsa-react";
-import Spinner from "@/components/Spinner";
 import { Loading } from "@/components/loading";
 
 export default function SearchForm() {
